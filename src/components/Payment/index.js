@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export default function PaymentComponent() {
   const [clicked, setClick] = useState(false);
+  const [live, setLive] = useState(false);
+    
   return (
     <>
       <Title>Ingresso e pagamento</Title>
       <Subtitle>Primeiro, escolha sua modalidade de Ingresso</Subtitle>
       <Options>
-        <Box>
+        <Box >
           <Text>Presencial</Text>
           <Price>R$ 250</Price>
         </Box>
@@ -28,6 +30,8 @@ export default function PaymentComponent() {
           <Price>+R$ 350</Price>
         </Box>
       </Options>
+      <Subtitle>Fechado! O total ficou em R$.Agora é só confirmar</Subtitle>
+      <button>RESERVAR INGRESSO</button>
     </>
   );
 }
@@ -80,4 +84,9 @@ font-size: 16px;
 font-weight: 400;
 color: #898989;
 font-family: "Roboto", sans-serif;
+`;
+const Reservation = styled.button`
+font-family: "Roboto", sans-serif;
+font-size: 14px;
+
 `;
