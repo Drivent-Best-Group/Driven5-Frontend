@@ -4,7 +4,8 @@ import styled from 'styled-components';
 export default function PaymentComponent() {
   const [clicked, setClick] = useState(false);
   const [live, setLive] = useState(false);
-    
+  const [price, setPrice] = useState(0);
+
   return (
     <>
       <Title>Ingresso e pagamento</Title>
@@ -31,7 +32,7 @@ export default function PaymentComponent() {
         </Box>
       </Options>
       <Subtitle>Fechado! O total ficou em R$.Agora é só confirmar</Subtitle>
-      <button>RESERVAR INGRESSO</button>
+      <Reservation>RESERVAR INGRESSO</Reservation>
     </>
   );
 }
@@ -88,5 +89,6 @@ font-family: "Roboto", sans-serif;
 const Reservation = styled.button`
 font-family: "Roboto", sans-serif;
 font-size: 14px;
-
+height: 37px;
 `;
+
