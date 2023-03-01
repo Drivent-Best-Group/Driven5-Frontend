@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { useState } from 'react';
 import { Subtitle, Options, Box } from '../../style/paymentStyle';
 
@@ -16,6 +17,8 @@ export default function Ticket() {
           <h2>R$ 100</h2>
         </Box>
       </Options>
+      
     </>
   );
 }
+
