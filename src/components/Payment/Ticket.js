@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Subtitle, Options, Box } from '../../style/paymentStyle';
 import { AuthContext } from '../../contexts/Auth.js';
 //import axios from 'axios';
@@ -24,7 +24,6 @@ export default function Ticket() {
     promise.catch((err) => {
       console.log('erro ticket', err.response.data);
     });
-
   }, [setCards]);
 
   function handleClick(id) {
