@@ -44,3 +44,91 @@ h2{
 export const Options = styled.div`
 display: flex;
 `;
+
+export const ReservationButton = styled.button`
+width: 182px;
+height: 37px;
+background: #E0E0E0;
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+border-radius: 4px;
+border-width: 0px;
+margin-left: -290px;
+margin-top: 35px;
+
+:hover{
+  cursor: pointer;
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.25);
+}
+`;
+
+export const BoxCard = styled.div`
+width: 290px;
+height: 108px;
+
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+
+margin-right: 20px;
+margin-bottom: 40px;
+
+border-radius: 20px;
+
+font-size: 16px;
+font-weight: 400;
+font-family: "Roboto", sans-serif;
+
+background-color: #FFEED2;
+
+:hover{
+  cursor:pointer
+}
+
+h1{
+  color: #454545;
+  margin-bottom: 3px;
+}
+
+h2{
+  color: #898989;
+}
+`;
+
+export const PaymentForm = styled.div`
+    display: flex;
+    form{
+        display: flex;
+        flex-direction: column;
+    }
+    input{
+        margin-left: 30px;
+        width: 350px;
+        height: 45px;
+        border-radius: 5px;
+        border-color: #8e8e8e;
+        border-width: 1px;
+        border-style: solid;
+        color: #8e8e8e;
+        font-family: "Roboto", sans-serif;
+        font-size: 17px;
+        margin-bottom: 15px;
+        padding-left: 8px
+    }
+    span{
+        color: #8e8e8e;
+        font-family: "Roboto", sans-serif;
+        margin: -5px 0px 10px 30px;
+    }
+`;
+export const ValidCvc = styled.div`
+    display: flex;
+    flex-direction: row;
+    input:nth-child(1){
+        width: 215px;
+    }
+    input:nth-child(2){
+        width: 115px;
+        margin-left: 20px;
+    }
+`;

@@ -2,6 +2,7 @@ import Ticket from '../../../components/Payment/Ticket';
 import styled from 'styled-components';
 import Accomodation from '../../../components/Payment/Accommodation';
 import Reservation from '../../../components/Payment/Reservation';
+import CreditCard from '../../../components/Payment/CreditCard';
 
 export default function Payment() {
   return (
@@ -10,6 +11,7 @@ export default function Payment() {
       <Ticket/>
       <Accomodation/>
       <Reservation />
+      <CreditCard ticketType={'Presencial + Com Hotel'} price={600}/>
     </>
   );
 }
