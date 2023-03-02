@@ -1,9 +1,26 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Subtitle, Options, Box } from '../../style/paymentStyle';
 import { AuthContext } from '../../contexts/Auth.js';
 
 export default function Ticket() {
   const { ticket, setTicket } = useContext(AuthContext);
+  const [cards, setCards] = useState([]);
+  const token = useToken();
+
+  useEffect(() => {
+    const promise = setCards(token);
+
+    promise.then((res) => {
+      let data = res.data;
+      console.log(res);
+      setCards(data);
+    });
+
+    promise.catch((err) => {
+      console.log('erro ticket', err.response.data);
+    });
+
+  }, [setCards]);
 
   function handleClick(id) {
     setTicket(id);
@@ -22,6 +39,18 @@ export default function Ticket() {
           <h2>R$ 100</h2>
         </Box>
       </Options>
+      {/*  {tickets.map((t) =>
+        <Options key={t.id}>
+          <Box>
+            <h1>{d.modalidade}</h1>
+            <h2>{d.valor}</h2>
+          </Box>
+          <Box>
+          <h1>{d.modalidade}</h1>
+            <h2>{d.valor}</h2>
+          </Box>
+        </Options>
+      )} */}
     </>
   );
 }
