@@ -18,28 +18,31 @@ import Certificate from './pages/Dashboard/Certificate';
 
 import { EventInfoProvider } from './contexts/EventInfoContext';
 import { UserProvider } from './contexts/UserContext';
+import AuthProvider from './contexts/Auth.js';
 
 import useToken from './hooks/useToken';
-import { PaymentProvider } from './contexts/PaymentContext';
 
 export default function App() {
   return (
     <>
       <ToastContainer />
       <EventInfoProvider>
-        <UserProvider>
-          <PaymentProvider>
+        <AuthProvider>
+          <UserProvider>
             <Router>
               <Routes>
                 <Route path="/" element={<Countdown />} />
                 <Route path="/enroll" element={<Enroll />} />
                 <Route path="/sign-in" element={<SignIn />} />
 
-                <Route path="/dashboard" element={
-                  <ProtectedRouteGuard>
-                    <Dashboard />
-                  </ProtectedRouteGuard>
-                }>
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRouteGuard>
+                      <Dashboard />
+                    </ProtectedRouteGuard>
+                  }
+                >
                   <Route path="subscription" element={<FillSubscription />} />
                   <Route path="payment" element={<Payment />} />
                   <Route path="hotel" element={<Hotel />} />
@@ -49,8 +52,8 @@ export default function App() {
                 </Route>
               </Routes>
             </Router>
-          </PaymentProvider>
-        </UserProvider>
+          </UserProvider>
+        </AuthProvider>
       </EventInfoProvider>
     </>
   );
