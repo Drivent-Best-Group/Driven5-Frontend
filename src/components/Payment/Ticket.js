@@ -1,6 +1,11 @@
 import { useContext, useEffect } from 'react';
 import { Subtitle, Options, Box } from '../../style/paymentStyle';
 import { AuthContext } from '../../contexts/Auth.js';
+//import axios from 'axios';
+//import * as paymentApi from '../../services/paymentApi';
+import useToken from '../../hooks/useToken';
+//import api from '../../services/api';
+import { getTickets } from '../../services/paymentApi';
 
 export default function Ticket() {
   const { ticket, setTicket } = useContext(AuthContext);
@@ -8,7 +13,7 @@ export default function Ticket() {
   const token = useToken();
 
   useEffect(() => {
-    const promise = setCards(token);
+    const promise = getTickets(token);
 
     promise.then((res) => {
       let data = res.data;
