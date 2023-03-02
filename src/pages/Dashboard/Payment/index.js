@@ -3,27 +3,32 @@ import styled from 'styled-components';
 import Accomodation from '../../../components/Payment/Accommodation';
 import Reservation from '../../../components/Payment/Reservation';
 import CreditCard from '../../../components/Payment/CreditCard';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/Auth';
 
 export default function Payment() {
   const { ticket, accomodation } = useContext(AuthContext);
+  const [showPayment, setShowPayment] = useState(false);
+
   return (
     <>
-      <Title>Ingresso e pagamento</Title>
-      <Ticket/>
-      {ticket === 1 && <Accomodation/>}
-      {ticket === 2 || accomodation !== undefined ? <Reservation /> : ''}
-      <CreditCard ticketType={'Presencial + Com Hotel'} price={600}/>
+      {!showPayment && (
+        <>
+          <Title>Ingresso e pagamento</Title>
+          <Ticket />
+          {ticket === 1 && <Accomodation />}
+          {ticket === 2 || accomodation !== undefined ? <Reservation setShowPayment={setShowPayment} /> : ''}
+        </>
+      )}
+      {showPayment && <CreditCard ticketType={'Presencial + Com Hotel'} price={600} />}
     </>
   );
 }
 
 const Title = styled.h1`
-font-size: 34px;
-font-weight: 400;
-color: #000000;
-font-family: "Roboto", sans-serif;
-margin-bottom: 37px;
+  font-size: 34px;
+  font-weight: 400;
+  color: #000000;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 37px;
 `;
-
