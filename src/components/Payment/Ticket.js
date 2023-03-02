@@ -1,31 +1,31 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Subtitle, Options, Box } from '../../style/paymentStyle';
 import { AuthContext } from '../../contexts/Auth.js';
 //import axios from 'axios';
 //import * as paymentApi from '../../services/paymentApi';
 import useToken from '../../hooks/useToken';
 //import api from '../../services/api';
-import { getTickets } from '../../services/paymentApi';
+// import { getTickets } from '../../services/paymentApi';
 
 export default function Ticket() {
   const { ticket, setTicket } = useContext(AuthContext);
   const [cards, setCards] = useState([]);
   const token = useToken();
 
-  useEffect(() => {
-    const promise = getTickets(token);
+  // useEffect(() => {
+  //   const promise = getTickets(token);
 
-    promise.then((res) => {
-      let data = res.data;
-      console.log(res);
-      setCards(data);
-    });
+  //   promise.then((res) => {
+  //     let data = res.data;
+  //     console.log(res);
+  //     setCards(data);
+  //   });
 
-    promise.catch((err) => {
-      console.log('erro ticket', err.response.data);
-    });
+  //   promise.catch((err) => {
+  //     console.log('erro ticket', err.response.data);
+  //   });
 
-  }, [setCards]);
+  // }, [setCards]);
 
   function handleClick(id) {
     setTicket(id);

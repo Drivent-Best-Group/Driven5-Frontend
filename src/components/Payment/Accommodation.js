@@ -3,7 +3,7 @@ import { Subtitle, Options, Box } from '../../style/paymentStyle';
 import { AuthContext } from '../../contexts/Auth';
 
 export default function Accomodation() {
-  const { accomodation, setAccomodation, color, setColor } = useContext(AuthContext);
+  const { accomodation, setAccomodation } = useContext(AuthContext);
 
   function toClick() {
     console.log('ola');          
