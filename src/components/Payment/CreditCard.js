@@ -16,6 +16,7 @@ export default function CreditCard(props) {
   const [payment, setPayment] = useState(false);
   const [loading, setLoading] = useState(false);
   const [paymentData, setPaymentData] = useState({});
+  const [teste, setTeste] = useState({});
   const [form, setForm] = useState({
     cvc: '',
     expiry: '',
@@ -39,19 +40,19 @@ export default function CreditCard(props) {
     }
   };
 
-  useEffect(() => {
-    setLoading(true);
-    const promise = axios.get(`http://localhost:4000/payments?ticketId=${props.ticketId}`, config ); //trocar URL depois
-    promise.then((res) => {
-      setPaymentData(res);
-      setPayment(true);
-      setLoading(false);
-    });
-    promise.catch((res) => {
-      setPayment(false);
-      setLoading(false);
-    });
-  }, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   const promise = axios.get(`http://localhost:4000/payments?ticketId=${props.ticketPaid}`, config ); //trocar URL depois
+  //   promise.then((res) => {
+  //     setPaymentData(res);
+  //     setPayment(true);
+  //     setLoading(false);
+  //   });
+  //   promise.catch((res) => {
+  //     setPayment(false);
+  //     setLoading(false);
+  //   });
+  // }, []);
 
   async function confirmPayment(event) {
     event.preventDefault();

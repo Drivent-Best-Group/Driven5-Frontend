@@ -7,9 +7,9 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/Auth';
 
 export default function Payment() {
-  const { ticket, accomodation, setTicket } = useContext(AuthContext);
+  const { ticket, accomodation, ticket2, setTicket2 } = useContext(AuthContext);
   const [showPayment, setShowPayment] = useState(false);
-  const [ticketData, setTicketData] = useState({ name: '', price: 0, ticketId: 0 });
+  const [ticketData, setTicketData] = useState({ name: '', price: 0, ticket: {} });
   
   return (
     <>
@@ -17,11 +17,11 @@ export default function Payment() {
         <>
           <Title>Ingresso e pagamento</Title>
           <Ticket />
-          {!ticket.isRemote && <Accomodation setShowPayment={setShowPayment} setTicketData={setTicketData} />}
-          {ticket.isRemote ? <Reservation setShowPayment={setShowPayment} setTicketData={setTicketData}/> : ''}
+          {!ticket.isRemote && <Accomodation setShowPayment={setShowPayment} setTicketData={setTicketData} ticketData={ticketData} />}
+          {ticket.isRemote ? <Reservation setShowPayment={setShowPayment} setTicketData={setTicketData} ticketData={ticketData}/> : ''}
         </>
       )}
-      {showPayment && <CreditCard ticketType={ticketData.name} price={ticketData.price} ticketId={ticket.id}/>}
+      {showPayment && <CreditCard ticketType={ticketData.name} price={ticketData.price} ticketId={ticket2.id} ticketPaid={ticket.id}/>}
     </>
   );
 }

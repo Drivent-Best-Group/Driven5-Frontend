@@ -33,7 +33,7 @@ export default function Ticket() {
       <Subtitle>Primeiro, escolha sua modalidade de Ingresso</Subtitle>
       <Options>
         {cards.map((c) =>
-          <Box key={c.id} onClick={() => { handleClick(c); }}>
+          <Box key={c.id} onClick={() => handleClick(c)} clicked = {ticket === c.id}>
             <h1>{c.name}</h1>
             <h2>R${c.price}</h2>
           </Box>
