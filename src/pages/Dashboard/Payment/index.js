@@ -9,6 +9,7 @@ import { AuthContext } from '../../../contexts/Auth';
 export default function Payment() {
   const { ticket, accomodation } = useContext(AuthContext);
   const [showPayment, setShowPayment] = useState(false);
+  const [ticketData, setTicketData] = useState({ name: '', price: 0, ticketId: 0 });
 
   return (
     <>
@@ -17,10 +18,10 @@ export default function Payment() {
           <Title>Ingresso e pagamento</Title>
           <Ticket />
           {ticket === 1 && <Accomodation />}
-          {ticket === 2 || accomodation !== undefined ? <Reservation setShowPayment={setShowPayment} /> : ''}
+          {ticket === 2 || accomodation !== undefined ? <Reservation setShowPayment={setShowPayment} setTicketData={setTicketData}/> : ''}
         </>
       )}
-      {showPayment && <CreditCard ticketType={'Presencial + Com Hotel'} price={600} />}
+      {showPayment && <CreditCard ticketType={ticketData.name} price={ticketData.price} ticketId={1}/>}
     </>
   );
 }
