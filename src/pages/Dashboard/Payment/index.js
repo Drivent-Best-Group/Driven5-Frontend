@@ -11,7 +11,7 @@ export default function Payment() {
       <Ticket/>
       <Accomodation/>
       <Reservation />
-      <CreditCard ticketType={'Presencial + Com Hotel'} price={600}/>
+      <CreditCard ticketType={'Presencial + Com Hotel'} price={600} ticketId={1}/> {/* ticketId, ticketType e price vão ser passados dinamicamente por enquanto estão chumbados */}
     </>
   );
 }

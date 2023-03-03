@@ -54,6 +54,7 @@ border-radius: 4px;
 border-width: 0px;
 margin-left: -290px;
 margin-top: 35px;
+z-index: 1;
 
 :hover{
   cursor: pointer;
@@ -131,4 +132,32 @@ export const ValidCvc = styled.div`
         width: 115px;
         margin-left: 20px;
     }
+`;
+
+export const Loading = styled.div`
+  color: black;
+    .lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 10px solid pink;
+    border-color: pink transparent pink transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 `;
