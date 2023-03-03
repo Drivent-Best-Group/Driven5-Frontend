@@ -161,3 +161,12 @@ export const Loading = styled.div`
     }
   }
 `;
+
+export const StyledSpan = styled.span`
+  font-size: 20px;
+  font-weight: 400;
+  color: #8e8e8e;
+  font-family: 'Roboto', sans-serif;
+  display: table;
+  margin-bottom: 0 auto;
+`;
