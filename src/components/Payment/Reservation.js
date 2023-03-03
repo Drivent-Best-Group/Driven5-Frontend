@@ -17,7 +17,7 @@ export default function Reservation({ setShowPayment, setTicketData }) {
     }
   }
 
-  function teste() {
+  function setData() {
     setShowPayment(true);
     setTicketData({ price: value, name: ticketName });
   }
@@ -25,7 +25,7 @@ export default function Reservation({ setShowPayment, setTicketData }) {
   return (
     <>
       <Subtitle>Fechado! O total ficou em R${value} Agora é só confirmar</Subtitle>
-      <ReservationButton onClick={() => teste()}>RESERVAR INGRESSO</ReservationButton>
+      <ReservationButton onClick={() => setData()}>RESERVAR INGRESSO</ReservationButton>
     </>
   );
 }
