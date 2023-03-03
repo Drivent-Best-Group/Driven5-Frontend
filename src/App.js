@@ -18,7 +18,7 @@ import Certificate from './pages/Dashboard/Certificate';
 
 import { EventInfoProvider } from './contexts/EventInfoContext';
 import { UserProvider } from './contexts/UserContext';
-import AuthProvider from './pages/PaymentContext/Ayth.js';
+import AuthProvider from './contexts/Auth.js';
 
 import useToken from './hooks/useToken';
 
