@@ -4,7 +4,7 @@ import { Subtitle } from '../../style/paymentStyle';
 export default function Reservation( ) {
   return(
     <>
-      <Subtitle>Fechado! O total ficou em R$.Agora é só confirmar</Subtitle>
+      <Subtitle>Fechado! O total ficou em R$ ticketType.price .Agora é só confirmar</Subtitle>
       <ReservationButton>RESERVAR INGRESSO</ReservationButton>
     </>
   );

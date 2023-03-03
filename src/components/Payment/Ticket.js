@@ -24,7 +24,6 @@ export default function Ticket() {
   //   promise.catch((err) => {
   //     console.log('erro ticket', err.response.data);
   //   });
-
   // }, [setCards]);
 
   function handleClick(id) {
