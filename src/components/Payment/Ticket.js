@@ -1,6 +1,8 @@
-import styled from 'styled-components';
-import { useState } from 'react';
+import { AuthContext } from '../../contexts/Auth';
+import { useState, useContext, useEffect } from 'react';
 import { Subtitle, Options, Box } from '../../style/paymentStyle';
+import useToken from '../../hooks/useToken';
+import { getTickets } from '../../services/paymentApi';
 
 export default function Ticket() {
   const { ticket, setTicket, setAccomodation } = useContext(AuthContext);

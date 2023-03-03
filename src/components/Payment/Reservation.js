@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Subtitle } from '../../style/paymentStyle';
+import { AuthContext } from '../../contexts/Auth';
+import { useContext } from 'react';
 
 export default function Reservation({ setShowPayment, setTicketData }) {
   const { ticket, accomodation } = useContext(AuthContext);
@@ -15,7 +17,7 @@ export default function Reservation({ setShowPayment, setTicketData }) {
 
   return (
     <>
-      <Subtitle>Fechado! O total ficou em R$.Agora é só confirmar</Subtitle>
+      <Subtitle>Fechado! O total ficou em R${value} Agora é só confirmar</Subtitle>
       <ReservationButton>RESERVAR INGRESSO</ReservationButton>
     </>
   );
