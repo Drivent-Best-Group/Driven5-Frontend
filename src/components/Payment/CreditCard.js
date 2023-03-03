@@ -51,7 +51,6 @@ export default function CreditCard(props) {
       setPayment(false);
       setLoading(false);
     });
-    console.log(payment);
   }, []);
 
   async function confirmPayment(event) {

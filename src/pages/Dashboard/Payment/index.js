@@ -7,11 +7,15 @@ import CreditCard from '../../../components/Payment/CreditCard';
 export default function Payment() {
   return (
     <>
-      <Title>Ingresso e pagamento</Title>
-      <Ticket/>
-      <Accomodation/>
-      <Reservation />
-      <CreditCard ticketType={'Presencial + Com Hotel'} price={600} ticketId={1}/> {/* ticketId, ticketType e price vão ser passados dinamicamente por enquanto estão chumbados */}
+      {!showPayment && (
+        <>
+          <Title>Ingresso e pagamento</Title>
+          <Ticket />
+          {!ticket.isRemote && <Accomodation setShowPayment={setShowPayment} setTicketData={setTicketData} />}
+          {ticket.isRemote ? <Reservation setShowPayment={setShowPayment} setTicketData={setTicketData}/> : ''}
+        </>
+      )}
+      {showPayment && <CreditCard ticketType={ticketData.name} price={ticketData.price} ticketId={ticket.id}/>}
     </>
   );
 }

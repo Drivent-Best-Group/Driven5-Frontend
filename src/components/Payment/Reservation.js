@@ -1,8 +1,19 @@
 import styled from 'styled-components';
 import { Subtitle } from '../../style/paymentStyle';
 
-export default function Reservation( ) {
-  return(
+export default function Reservation({ setShowPayment, setTicketData }) {
+  const { ticket, accomodation } = useContext(AuthContext);
+  let value = 0;
+  let ticketName = '';
+  value = ticket.price;
+  ticketName = ticket.name;
+
+  function setData() {
+    setShowPayment(true);
+    setTicketData({ price: value, name: ticketName });
+  }
+
+  return (
     <>
       <Subtitle>Fechado! O total ficou em R$.Agora é só confirmar</Subtitle>
       <ReservationButton>RESERVAR INGRESSO</ReservationButton>
