@@ -19,6 +19,7 @@ export default function Ticket() {
       let data = res.data;
       console.log(res);
       setCards(res);
+      console.log(cards);
     });
 
     promise.catch((err) => {
@@ -49,12 +50,14 @@ export default function Ticket() {
         </Box>
       </Options> */}
       <Options>
-        {cards.map((c) =>
-          <Box key={c.id}>
-            <h1>{c.name}</h1>
-            <h2>R${c.price}</h2>
-          </Box>
-        )}
+        {cards.map((card) => {
+          return (
+            <Box key={card.id} onClick={() => handleClick(card.id)} clicked = {ticket === card.id}>
+              <h1>{card.name}</h1>
+              <h2>R${card.price}</h2>
+            </Box>
+          );
+        })}
       </Options>
     </>
   );
