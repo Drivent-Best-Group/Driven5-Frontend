@@ -5,7 +5,6 @@ import { Subtitle, ValidCvc, BoxCard, PaymentForm, ReservationButton, Loading, B
 
 export default function Accomodation({ setShowPayment, setTicketData }) {
   const { accomodation, setAccomodation, ticket } = useContext(AuthContext);
-
   return (
     <>
       <Subtitle>Ótimo! Agora escolha sua modalidade de hospedagem</Subtitle>
