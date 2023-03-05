@@ -17,7 +17,7 @@ export default function Ticket() {
 
     promise.then((res) => {
       let data = res.data;
-      console.log(res);
+      console.log(data);
       setCards(res);
       console.log(cards);
     });
