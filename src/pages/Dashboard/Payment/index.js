@@ -7,23 +7,21 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/Auth';
 import NoEnrollment from '../../../components/Payment/NoEnrollment';
 export default function Payment() {
-  const { ticket, accomodation } = useContext(AuthContext);
+  const { ticket, accomodation, ticket2, setTicket2 } = useContext(AuthContext);
   const [showPayment, setShowPayment] = useState(false);
   const [ticketData, setTicketData] = useState({ name: '', price: 0, ticket: {} });
-  const [userEnrollment, setUserEnrollment] = useState(undefined);
-
+  
   return (
     <>
       <Title>Ingresso e pagamento</Title>
       {!showPayment && (
         <>
           <Ticket />
-          {ticket === 1 && <Accomodation />}
-          {ticket === 2 || accomodation !== undefined ? <Reservation setShowPayment={setShowPayment} /> : ''}
+          {!ticket.isRemote && <Accomodation setShowPayment={setShowPayment} setTicketData={setTicketData} ticketData={ticketData} />}
+          {ticket.isRemote ? <Reservation setShowPayment={setShowPayment} setTicketData={setTicketData} ticketData={ticketData}/> : ''}
         </>
       )}
-      {showPayment && <CreditCard ticketType={'Presencial + Com Hotel'} price={600} />}
-      <NoEnrollment userEnrollment={userEnrollment} setUserEnrollment={setUserEnrollment} />
+      {showPayment && <CreditCard ticketType={ticketData.name} price={ticketData.price} ticketId={ticket2.id} ticketPaid={ticket.id}/>}
     </>
   );
 }
