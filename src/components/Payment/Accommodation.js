@@ -6,8 +6,9 @@ import { getTickets } from '../../services/paymentApi';
 import useToken from '../../hooks/useToken';
 
 export default function Accomodation({ setShowPayment, setTicketData }) {
-  const { accomodation, ticket, setTicket, setAccomodation } = useContext(AuthContext);
+  const { accomodation, setAccomodation } = useContext(AuthContext);
   const [cards, setCards] = useState([]);
+  const [ticket, setTicket] = useState([]);
   const token = useToken();
 
   useEffect(() => {
@@ -41,7 +42,16 @@ export default function Accomodation({ setShowPayment, setTicketData }) {
           );
         })}
       </Options>
-      {accomodation !== null ? <Reservation setShowPayment={setShowPayment} setTicketData={setTicketData} /> : ''}
+      {accomodation !== null ? (
+        <Reservation
+          setShowPayment={setShowPayment}
+          setTicketData={setTicketData}
+          ticket={ticket}
+          setTicket={setTicket}
+        />
+      ) : (
+        ''
+      )}
     </>
   );
 }

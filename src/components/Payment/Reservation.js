@@ -6,21 +6,22 @@ import axios from 'axios';
 import useToken from '../../hooks/useToken';
 import UserContext from '../../contexts/UserContext';
 
-export default function Reservation({ setShowPayment, setTicketData, ticketData }) {
+export default function Reservation({ setShowPayment, setTicketData, ticketData, ticket }) {
   const { userData: user } = useContext(UserContext);
   const token = useToken();
-  const { ticket, accomodation, setTicket, ticket2, setTicket2 } = useContext(AuthContext);
+  const { accomodation, ticket2, setTicket2 } = useContext(AuthContext);
+  // setTicket ticket
   let value = 0;
   let ticketName = '';
   value = ticket.price;
   ticketName = ticket.name;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}` }
+    headers: { Authorization: `Bearer ${token}` },
   };
 
   const ticketDataAPI = {
-    ticketTypeId: ticket.id
+    ticketTypeId: ticket.id,
   };
 
   function setData() {
@@ -29,7 +30,7 @@ export default function Reservation({ setShowPayment, setTicketData, ticketData 
       console.log(res.data);
       setTicket2(res.data);
       setShowPayment(true);
-      setTicketData({ price: value, name: ticketName });  
+      setTicketData({ price: value, name: ticketName });
     });
     promise.catch((res) => {
       alert('erro');
