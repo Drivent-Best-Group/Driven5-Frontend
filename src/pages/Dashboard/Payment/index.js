@@ -16,8 +16,6 @@ export default function Payment() {
   const { enrollment } = useEnrollment();
   const { token } = useToken();
 
-  const userTicket = getUserTickets(token);
-
   if (!enrollment) {
     return (
       <>
@@ -29,8 +27,7 @@ export default function Payment() {
     );
   }
 
-  if (userTicket) {
-  }
+  
 
   return (
     <>
