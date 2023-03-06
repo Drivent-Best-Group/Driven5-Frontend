@@ -6,14 +6,15 @@ import { getTickets } from '../../services/paymentApi';
 
 export default function Ticket() {
   const { ticket, setTicket } = useContext(AuthContext);
-  const [cards, setCards] = useState([]);
   const token = useToken();
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     const promise = getTickets(token);
 
     promise.then((res) => {
-      setCards(res);
+      const newCards = res.filter((card) => card.includesHotel === false);
+      setCards(newCards);
     });
 
     promise.catch((err) => {

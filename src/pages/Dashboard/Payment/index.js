@@ -31,7 +31,7 @@ export default function Payment() {
         <>
           <Ticket />
           {ticket.name === 'Presencial' ? (
-            <Accomodation setShowPayment={setShowPayment} setTicketData={setTicketData} ticketData={ticketData} />
+            <Accomodation setShowPayment={setShowPayment} setTicketData={setTicketData} />
           ) : (
             ''
           )}
