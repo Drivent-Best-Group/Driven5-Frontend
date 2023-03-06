@@ -30,7 +30,7 @@ export default function Payment() {
       {!showPayment && (
         <>
           <Ticket />
-          {ticket.name === 'Presencial' ? (
+          {!ticket.isRemote  ? (
             <Accomodation setShowPayment={setShowPayment} setTicketData={setTicketData} />
           ) : (
             ''

@@ -6,7 +6,7 @@ import { getTickets } from '../../services/paymentApi';
 import useToken from '../../hooks/useToken';
 
 export default function Accomodation({ setShowPayment, setTicketData }) {
-  const { accomodation, ticket, setTicket } = useContext(AuthContext);
+  const { accomodation, ticket, setTicket, setAccomodation } = useContext(AuthContext);
   const [cards, setCards] = useState([]);
   const token = useToken();
 
@@ -25,6 +25,7 @@ export default function Accomodation({ setShowPayment, setTicketData }) {
 
   function handleClick(ticket) {
     setTicket(ticket);
+    setAccomodation(true);
   }
 
   return (

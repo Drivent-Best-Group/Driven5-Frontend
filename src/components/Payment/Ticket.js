@@ -6,15 +6,14 @@ import { getTickets } from '../../services/paymentApi';
 
 export default function Ticket() {
   const { ticket, setTicket } = useContext(AuthContext);
-  const token = useToken();
   const [cards, setCards] = useState([]);
+  const token = useToken();
 
   useEffect(() => {
     const promise = getTickets(token);
 
     promise.then((res) => {
-      const newCards = res.filter((card) => card.includesHotel === false);
-      setCards(newCards);
+      setCards(res);
     });
 
     promise.catch((err) => {
@@ -32,7 +31,7 @@ export default function Ticket() {
       <Options>
         {cards.map((card) => {
           return (
-            <Box key={card.id} onClick={() => handleClick(card)} clicked={ticket.id === card.id}>
+            <Box key={card.id} onClick={() => handleClick(card)} clicked={ticket.isRemote ? ticket.isRemote === true : ticket.isRemote === false}>
               <h1>{card.name}</h1>
               <h2>R${card.price}</h2>
             </Box>
