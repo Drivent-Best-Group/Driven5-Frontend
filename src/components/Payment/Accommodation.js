@@ -1,7 +1,7 @@
 import { AuthContext } from '../../contexts/Auth';
 import Reservation from '../../components/Payment/Reservation';
 import { useContext } from 'react';
-import { Subtitle, ValidCvc, BoxCard, PaymentForm, ReservationButton, Loading, Box, Options } from '../../style/paymentStyle';
+import { Subtitle, Box, Options } from '../../style/paymentStyle';
 
 export default function Accomodation({ setShowPayment, setTicketData }) {
   const { accomodation, setAccomodation, ticket } = useContext(AuthContext);
