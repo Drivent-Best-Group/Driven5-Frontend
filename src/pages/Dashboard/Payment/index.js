@@ -14,9 +14,6 @@ export default function Payment() {
   const [showPayment, setShowPayment] = useState(false);
   const [ticketData, setTicketData] = useState({ name: '', price: 0, ticket: {} });
   const { enrollment } = useEnrollment();
-  const { token } = useToken();
-
-  const userTicket = getUserTickets(token);
 
   if (!enrollment) {
     return (
@@ -27,9 +24,6 @@ export default function Payment() {
         </Text>
       </>
     );
-  }
-
-  if (userTicket) {
   }
 
   return (
