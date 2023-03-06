@@ -25,9 +25,7 @@ export default function Payment() {
         </Text>
       </>
     );
-  }
-
-  
+  }  
 
   return (
     <>
