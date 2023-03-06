@@ -1,31 +1,46 @@
 import { AuthContext } from '../../contexts/Auth';
 import Reservation from '../../components/Payment/Reservation';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Subtitle, Box, Options } from '../../style/paymentStyle';
+import { getTickets } from '../../services/paymentApi';
+import useToken from '../../hooks/useToken';
 
 export default function Accomodation({ setShowPayment, setTicketData }) {
-  const { accomodation, setAccomodation, ticket } = useContext(AuthContext);
+  const { accomodation, ticket, setTicket } = useContext(AuthContext);
+  const [cards, setCards] = useState([]);
+  const token = useToken();
+
+  useEffect(() => {
+    const promise = getTickets(token);
+
+    promise.then((res) => {
+      const newCards = res.filter((card) => card.isRemote === false);
+      setCards(newCards);
+    });
+
+    promise.catch((err) => {
+      console.log('erro ticket', err.response.data);
+    });
+  }, [setCards]);
+
+  function handleClick(ticket) {
+    setTicket(ticket);
+  }
+
   return (
     <>
       <Subtitle>Ótimo! Agora escolha sua modalidade de hospedagem</Subtitle>
       <Options>
-        {ticket.includesHotel === false ? <Box onClick={() => setAccomodation(false)} clicked={accomodation === false}>
-          <h1>Sem Hotel</h1>
-          <h2>+R$ 0</h2>
-        </Box> 
-          :<>
-            <Box onClick={() =>  setAccomodation(false)} clicked={accomodation === false}>
-              <h1>Sem Hotel</h1>
-              <h2>{ticket.price}</h2>
-            </Box> 
-            <Box onClick={() =>  setAccomodation(true)} clicked={accomodation === true}>
-              <h1>Com Hotel</h1>
-              <h2>{ticket.price}</h2>
+        {cards.map((card) => {
+          return (
+            <Box key={card.id} onClick={() => handleClick(card)} clicked={ticket.id === card.id}>
+              <h1>{card.includesHotel ? 'Com Hotel' : 'Sem Hotel'}</h1>
+              <h2>+ R${card.includesHotel ? '350' : '0'}</h2>
             </Box>
-          </> 
-        }
+          );
+        })}
       </Options>
-      { accomodation !== null ? <Reservation setShowPayment={setShowPayment} setTicketData={setTicketData}/> : '' }
+      {accomodation !== null ? <Reservation setShowPayment={setShowPayment} setTicketData={setTicketData} /> : ''}
     </>
   );
 }
