@@ -6,12 +6,17 @@ import CreditCard from '../../../components/Payment/CreditCard';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/Auth';
 import useEnrollment from '../../../hooks/api/useEnrollment';
+import { getUserTickets } from '../../../services/userTicketApi';
+import useToken from '../../../hooks/useToken';
 
 export default function Payment() {
   const { ticket, ticket2 } = useContext(AuthContext);
   const [showPayment, setShowPayment] = useState(false);
   const [ticketData, setTicketData] = useState({ name: '', price: 0, ticket: {} });
   const { enrollment } = useEnrollment();
+  const { token } = useToken();
+
+  const userTicket = getUserTickets(token);
 
   if (!enrollment) {
     return (
@@ -24,18 +29,23 @@ export default function Payment() {
     );
   }
 
+  if (userTicket) {
+  }
+
   return (
     <>
+      <Title>Ingresso e pagamento</Title>
       {!showPayment && (
         <>
           <Ticket />
-          {ticket.name === 'Presencial' ? (
-            <Accomodation setShowPayment={setShowPayment} setTicketData={setTicketData} />
-          ) : (
-            ''
-          )}
-          {ticket.isRemote ? (
-            <Reservation setShowPayment={setShowPayment} setTicketData={setTicketData} ticketData={ticketData} />
+          {!ticket.isRemote ? <Accomodation setShowPayment={setShowPayment} setTicketData={setTicketData} /> : ''}
+          {ticket.id === 2 ? (
+            <Reservation
+              setShowPayment={setShowPayment}
+              setTicketData={setTicketData}
+              ticketData={ticketData}
+              ticket={ticket}
+            />
           ) : (
             ''
           )}
@@ -67,7 +77,7 @@ const Text = styled.div`
   margin: auto;
   display: flex;
   align-items: center;
-  
+
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
