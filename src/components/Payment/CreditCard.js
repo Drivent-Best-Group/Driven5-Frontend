@@ -40,19 +40,19 @@ export default function CreditCard(props) {
     }
   };
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   const promise = axios.get(`http://localhost:4000/payments?ticketId=${props.ticketPaid}`, config ); //trocar URL depois
-  //   promise.then((res) => {
-  //     setPaymentData(res);
-  //     setPayment(true);
-  //     setLoading(false);
-  //   });
-  //   promise.catch((res) => {
-  //     setPayment(false);
-  //     setLoading(false);
-  //   });
-  // }, []);
+  useEffect(() => {
+    setLoading(true);
+    const promise = axios.get(`http://localhost:4000/payments?ticketId=${props.ticketPaid}`, config ); //trocar URL depois
+    promise.then((res) => {
+      setPaymentData(res);
+      setPayment(true);
+      setLoading(false);
+    });
+    promise.catch((res) => {
+      setPayment(false);
+      setLoading(false);
+    });
+  }, []);
 
   async function confirmPayment(event) {
     event.preventDefault();
