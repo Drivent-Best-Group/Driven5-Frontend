@@ -13,7 +13,6 @@ export default function Payment() {
   const [showPayment, setShowPayment] = useState(false);
   const [ticketData, setTicketData] = useState({ name: '', price: 0, ticket: {} });
   const { enrollment } = useEnrollment();
-  const { token } = useToken();
 
   if (!enrollment) {
     return (
@@ -24,7 +23,7 @@ export default function Payment() {
         </Text>
       </>
     );
-  }  
+  }
 
   return (
     <>
