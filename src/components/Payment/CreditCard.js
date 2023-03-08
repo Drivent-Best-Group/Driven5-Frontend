@@ -8,7 +8,6 @@ import axios from 'axios';
 import useToken from '../../hooks/useToken';
 import { useContext } from 'react';
 import UserContext from '../../contexts/UserContext';
-import { useEffect } from 'react';
  
 export default function CreditCard(props) {
   const { userData: user } = useContext(UserContext);
@@ -109,7 +108,7 @@ export default function CreditCard(props) {
                 <input
                   type="name"
                   name="name"
-                  placeholder="Name"
+                  placeholder="Name" 
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   onFocus={(e) => setForm({ ...form, focus: e.target.name  })}
                   maxLength={40}
