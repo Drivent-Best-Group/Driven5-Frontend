@@ -3,17 +3,31 @@ import styled from 'styled-components';
 import Accomodation from '../../../components/Payment/Accommodation';
 import Reservation from '../../../components/Payment/Reservation';
 import CreditCard from '../../../components/Payment/CreditCard';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../../contexts/Auth';
 import useEnrollment from '../../../hooks/api/useEnrollment';
 import { getUserTickets } from '../../../services/userTicketApi';
 import useToken from '../../../hooks/useToken';
 
 export default function Payment() {
-  const { ticket, ticket2 } = useContext(AuthContext);
+  const { ticket, ticket2, setTicket2 } = useContext(AuthContext);
   const [showPayment, setShowPayment] = useState(false);
-  const [ticketData, setTicketData] = useState({ name: '', price: 0, ticket: {} });
+  const [ticketData, setTicketData] = useState({});
   const { enrollment } = useEnrollment();
+  const token = useToken();
+  
+  useEffect(() => {
+    const promise = getUserTickets(token);
+  
+    promise.then((res) => {
+      setTicket2(res);
+      setShowPayment(true);
+    });
+  
+    promise.catch((err) => {
+      console.log(err);
+    });
+  }, []);
 
   if (!enrollment) {
     return (
@@ -47,10 +61,10 @@ export default function Payment() {
       )}
       {showPayment && (
         <CreditCard
-          ticketType={ticketData.name}
-          price={ticketData.price}
+          ticketType={ticket2.TicketType.name}
+          price={ticket2.TicketType.price}
           ticketId={ticket2.id}
-          ticketPaid={ticket.id}
+          ticketPaid={ticket2.id}
         />
       )}
     </>
