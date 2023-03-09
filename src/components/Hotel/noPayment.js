@@ -1,18 +1,17 @@
 import { Text } from '../../style/paymentStyle';
-import { getPayment } from '../../services/paymentApi';
 import useToken from '../../hooks/useToken';
 import { useEffect, useState } from 'react';
 import HotelComponent from '.';
+import { getHotelInformation } from '../../services/paymentApi';
 
 export default function NoPayment() {
   const token = useToken();
   const [paid, setPaid] = useState();
 
   useEffect(() => {
-    const promise = getPayment(token);
+    const promise = getHotelInformation(token);
 
     promise.then((res) => {
-      console.log('res no Payment', res.status);
       setPaid(res.status);
     });
 
@@ -28,9 +27,11 @@ export default function NoPayment() {
           ?
           <HotelComponent/>
           :
-          <h1>
-          Você precisa ter confirmado pagamento antes de fazer a escolha de hospedagem
-          </h1>
+          <Text>
+           Você precisa ter confirmado pagamento
+            <br />
+           antes de fazer a escolha de hospedagem
+          </Text>
         }
       </Text>
     </>
