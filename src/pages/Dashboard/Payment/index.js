@@ -14,6 +14,7 @@ export default function Payment() {
   const [showPayment, setShowPayment] = useState(false);
   const [ticketData, setTicketData] = useState({});
   const { enrollment } = useEnrollment();
+  
   const token = useToken();
   
   useEffect(() => {

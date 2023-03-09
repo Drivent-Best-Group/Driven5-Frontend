@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
@@ -9,7 +9,6 @@ import useToken from '../../hooks/useToken';
 import { useContext } from 'react';
 import UserContext from '../../contexts/UserContext';
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
  
 export default function CreditCard(props) {
   const { userData: user } = useContext(UserContext);
@@ -27,7 +26,7 @@ export default function CreditCard(props) {
   });
 
   const config = {
-    headers: { Authorization: `Bearer ${token}` }
+    headers: { Authorization: `Bearer ${token}` },
   };
 
   const body = {
@@ -37,13 +36,13 @@ export default function CreditCard(props) {
       number: form.number,
       name: form.name,
       expirationDate: form.expiry,
-      cvv: form.cvc
-    }
+      cvv: form.cvc,
+    },
   };
 
   useEffect(() => {
     setLoading(true);
-    const promise = axios.get(`http://localhost:4000/payments?ticketId=${props.ticketPaid}`, config ); //trocar URL depois
+    const promise = axios.get(`http://localhost:4000/payments?ticketId=${props.ticketPaid}`, config); //trocar URL depois
     promise.then((res) => {
       setPaymentData(res);
       setPayment(true);
@@ -57,12 +56,17 @@ export default function CreditCard(props) {
 
   async function confirmPayment(event) {
     event.preventDefault();
-    if(/[^0-9]/g.test(form.number) || /[^0-9]/g.test(form.expiry) || /[^0-9]/g.test(form.cvc) || /[^a-zA-Z ]/g.test(form.name)) {
-      return toast('Revise os dados do seu cartão e tente novamente');
+    if (
+      /[^0-9]/g.test(form.number) ||
+      /[^0-9]/g.test(form.expiry) ||
+      /[^0-9]/g.test(form.cvc) ||
+      /[^a-zA-Z ]/g.test(form.name)
+    ) {
+      return alert('Revise os dados do seu cartão e tente novamente');
     }
 
     setLoading(true);
-    const promise = axios.post('http://localhost:4000/payments/process', body, config ); //trocar URL depois
+    const promise = axios.post('http://localhost:4000/payments/process', body, config); //trocar URL depois
     promise.then((res) => {
       setPayment(true);
       setLoading(false);
@@ -71,11 +75,15 @@ export default function CreditCard(props) {
       toast('Sua forma de pagamento foi recusada, tente novamente');
       setLoading(false);
     });
-  };
+  }
 
   return (
     <>
-      { loading ? <Loading><div className='lds-dual-ring'/></Loading> :
+      {loading ? (
+        <Loading>
+          <div className="lds-dual-ring" />
+        </Loading>
+      ) : (
         <>
           <Subtitle>Ingresso escolhido</Subtitle>
           <BoxCard>
@@ -83,19 +91,19 @@ export default function CreditCard(props) {
             <h2>{'R$ ' + props.price}</h2>
           </BoxCard>
           <Subtitle>Pagamento</Subtitle>
-          { payment ? <Icon>
-            <ion-icon name="checkmark-circle"></ion-icon>
-            <h3> Pagamento confirmado! <br/> <span className='normal'>Prossiga para escolha de hospedagem e atividades</span> </h3>
-          </Icon> :
+          {payment ? (
+            <Icon>
+              <ion-icon name="checkmark-circle"></ion-icon>
+              <h3>
+                {' '}
+                Pagamento confirmado! <br />{' '}
+                <span className="normal">Prossiga para escolha de hospedagem e atividades</span>{' '}
+              </h3>
+            </Icon>
+          ) : (
             <PaymentForm>
-              <Cards
-                cvc={form.cvc}
-                expiry={form.expiry}
-                focused={form.focus}
-                name={form.name}
-                number={form.number}
-              />
-              <form onSubmit={ confirmPayment }>
+              <Cards cvc={form.cvc} expiry={form.expiry} focused={form.focus} name={form.name} number={form.number} />
+              <form onSubmit={confirmPayment}>
                 <input
                   type="tel"
                   name="number"
@@ -112,7 +120,7 @@ export default function CreditCard(props) {
                   name="name"
                   placeholder="Name"
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  onFocus={(e) => setForm({ ...form, focus: e.target.name  })}
+                  onFocus={(e) => setForm({ ...form, focus: e.target.name })}
                   maxLength={40}
                   minLength={4}
                   required={true}
@@ -123,7 +131,7 @@ export default function CreditCard(props) {
                     name="expiry"
                     placeholder="Valid Thru"
                     onChange={(e) => setForm({ ...form, expiry: e.target.value })}
-                    onFocus={(e) => setForm({ ...form, focus: e.target.name  })}
+                    onFocus={(e) => setForm({ ...form, focus: e.target.name })}
                     maxLength={4}
                     minLength={4}
                     required={true}
@@ -133,16 +141,18 @@ export default function CreditCard(props) {
                     name="cvc"
                     placeholder="CVC"
                     onChange={(e) => setForm({ ...form, cvc: e.target.value })}
-                    onFocus={(e) => setForm({ ...form, focus: e.target.name  })}
+                    onFocus={(e) => setForm({ ...form, focus: e.target.name })}
                     maxLength={3}
                     minLength={3}
                     required={true}
                   />
                 </ValidCvc>
-                <ReservationButton type='submit' > FINALIZAR PAGAMENTO </ReservationButton>
+                <ReservationButton type="submit"> FINALIZAR PAGAMENTO </ReservationButton>
               </form>
-            </PaymentForm> } 
-        </>}
+            </PaymentForm>
+          )}
+        </>
+      )}
     </>
   );
 }
@@ -152,16 +162,15 @@ const Icon = styled.div`
   margin-left: -5px;
   display: flex;
   color: green;
-  h3{
+  h3 {
     margin-left: 8px;
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
     color: #454545;
   }
-  .normal{
+  .normal {
     font-weight: normal;
     color: gray;
   }
 `;
-
