@@ -10,6 +10,7 @@ export default function Ticket() {
   const token = useToken();
   console.log(ticket);
   console.log(cards);
+  
   useEffect(() => {
     const promise = getTickets(token);
 
