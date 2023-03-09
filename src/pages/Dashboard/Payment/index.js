@@ -6,6 +6,7 @@ import CreditCard from '../../../components/Payment/CreditCard';
 import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../../contexts/Auth';
 import useEnrollment from '../../../hooks/api/useEnrollment';
+import { getUserTickets } from '../../../services/userTicketApi';
 import useToken from '../../../hooks/useToken';
 
 export default function Payment() {
@@ -13,6 +14,7 @@ export default function Payment() {
   const [showPayment, setShowPayment] = useState(false);
   const [ticketData, setTicketData] = useState({});
   const { enrollment } = useEnrollment();
+  
   const token = useToken();
   
   useEffect(() => {
