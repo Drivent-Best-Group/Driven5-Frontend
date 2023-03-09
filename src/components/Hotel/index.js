@@ -8,7 +8,6 @@ import { getHotels } from '../../services/hotelApi';
 export default function HotelComponent() {
   const token = useToken();
   const [ hotels, setHotels ] = useState([]);
-  const [ hasTicket, setHasTicket] = useState(null);
 
   useEffect(() => {
     const promiseHotel = getHotels(token);
@@ -16,12 +15,10 @@ export default function HotelComponent() {
     promiseHotel.then((res) => {
       console.log(res);
       setHotels(res);
-      setHasTicket(true);
     });
 
     promiseHotel.catch((err) => {
-      console.log(err);
-      setHasTicket(false);
+      console.log(err.response.status);
     });
   }, []);
 
