@@ -12,11 +12,12 @@ export default function NoHotel() {
     const promise = getHotelInformation(token);
 
     promise.then((res) => {
+      console.log(res);
       setTicketType(res.ticketTypeId);
     });
 
     promise.catch((err) => {
-      alert('erro');
+      console.log(err);
     });
   }, []);
 

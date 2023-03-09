@@ -30,7 +30,7 @@ export default function Reservation({ setShowPayment, setTicketData, ticketData,
       setTicketData({ price: value, name: ticketName });
     });
     promise.catch((res) => {
-      alert('erro');
+      console.log(res);
     });
   }
 
