@@ -9,6 +9,7 @@ import useToken from '../../hooks/useToken';
 import { useContext } from 'react';
 import UserContext from '../../contexts/UserContext';
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
  
 export default function CreditCard(props) {
   const { userData: user } = useContext(UserContext);
@@ -57,7 +58,7 @@ export default function CreditCard(props) {
   async function confirmPayment(event) {
     event.preventDefault();
     if(/[^0-9]/g.test(form.number) || /[^0-9]/g.test(form.expiry) || /[^0-9]/g.test(form.cvc) || /[^a-zA-Z ]/g.test(form.name)) {
-      return alert('Revise os dados do seu cartão e tente novamente');
+      return toast('Revise os dados do seu cartão e tente novamente');
     }
 
     setLoading(true);
@@ -67,7 +68,7 @@ export default function CreditCard(props) {
       setLoading(false);
     });
     promise.catch((res) => {
-      alert('Sua forma de pagamento foi recusada, tente novamente');
+      toast('Sua forma de pagamento foi recusada, tente novamente');
       setLoading(false);
     });
   };
