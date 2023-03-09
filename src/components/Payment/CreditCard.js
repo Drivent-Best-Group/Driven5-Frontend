@@ -48,6 +48,7 @@ export default function CreditCard(props) {
       setLoading(false);
     });
     promise.catch((res) => {
+      console.log('erro creditCard', res);
       setPayment(false);
       setLoading(false);
     });

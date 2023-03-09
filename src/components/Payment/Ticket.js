@@ -8,8 +8,8 @@ export default function Ticket() {
   const { ticket, setTicket } = useContext(AuthContext);
   const [cards, setCards] = useState([]);
   const token = useToken();
-  console.log(ticket);
-  console.log(cards);
+  console.log('ticket', ticket);
+  console.log('cards', cards);
   
   useEffect(() => {
     const promise = getTickets(token);

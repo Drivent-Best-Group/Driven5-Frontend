@@ -27,7 +27,7 @@ export default function Reservation({ setShowPayment, setTicketData, ticketData,
   function setData() {
     const promise = axios.post('http://localhost:4000/tickets', ticketDataAPI, config); //trocar URL depois
     promise.then((res) => {
-      console.log(res.data);
+      console.log('resposta api reserva', res.data);
       setTicket2(res.data);
       setShowPayment(true);
       setTicketData({ price: value, name: ticketName });
