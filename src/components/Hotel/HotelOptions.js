@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/Auth';
+import axios from 'axios';
+import { getHotelsWithRooms } from '../../services/hotelApi';
+import useToken from '../../hooks/useToken';
 
 export default function HotelOptions(props) {
+  const token = useToken();
   const { hotel, setHotel } = useContext(AuthContext);
-  
   function handleClick() {
     setHotel(props.hotel);
+    const hotelWRoom = getHotelsWithRooms(token, props.hotel.id)
+      .then((res) => { console.log(res); })
+      .catch((res) => { console.log(res); });
   }
-
   return (
     <>
       <Box onClick={() => handleClick(props.hotel)} clicked={ props.hotel.id === hotel.id }>
