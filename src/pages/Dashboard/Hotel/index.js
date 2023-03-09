@@ -7,12 +7,13 @@ import NoHotel from '../../../components/Hotel/noHotel';
 import useToken from '../../../hooks/useToken';
 import { getTickets } from '../../../services/paymentApi';
 import useTicketType from '../../../hooks/api/useTicketType';
+import NoPayment from '../../../components/Hotel/noPayment';
 
 export default function Hotel() {
   const { ticket, setTicket, ticketType, setTicketType } = useContext(AuthContext);
   const token = useToken();
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const promise = getTickets(token);
 
     promise.then((res) => {
@@ -23,12 +24,13 @@ export default function Hotel() {
     promise.catch((err) => {
       console.log(err);
     });
-  }, []);
+  }, []); */
 
   return (
     <>
       <Title>Escolha de hotel e quarto</Title>
       <NoHotel />
+      {/* <NoPayment /> */}
       {/* {ticketType.includesHotel === false ? <NoHotel /> : <HotelComponent />} */}
     </>
   );

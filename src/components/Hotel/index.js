@@ -1,7 +1,7 @@
-export async function HotelComponent() {
+export default function HotelComponent() {
   return (
     <>
-      <span>Apenas um texto</span>
+      <h1>Tela de hoteis</h1>
     </>
   );
 }
