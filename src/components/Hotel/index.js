@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import useToken from '../../hooks/useToken';
 import { getHotels } from '../../services/hotelApi';
-import NoHotel from './noHotel';
-import Teste from './teste';
 
 export default function HotelComponent() {
   const token = useToken();
@@ -29,16 +27,14 @@ export default function HotelComponent() {
 
   return (
     <>
-      {!hasTicket ? <Teste/> : <>
-        <Subtitle>Primeiro, escolha seu hotel</Subtitle>
-        <DivHotelOptions>
-          {hotels.map((hotel) => {
-            return(
-              <HotelOptions hotel={hotel} key={hotel.id} availableRooms={103} accommodations={'Single e Double'} name={hotel.name} image={hotel.image}/>
-            );
-          })}
-        </DivHotelOptions>
-      </>}
+      <Subtitle>Primeiro, escolha seu hotel</Subtitle>
+      <DivHotelOptions>
+        {hotels.map((hotel) => {
+          return(
+            <HotelOptions hotel={hotel} key={hotel.id} availableRooms={103} accommodations={'Single e Double'} name={hotel.name} image={hotel.image}/>
+          );
+        })}
+      </DivHotelOptions>
     </>
   );
 }

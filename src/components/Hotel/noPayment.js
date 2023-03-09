@@ -1,37 +1,37 @@
 import { Text } from '../../style/paymentStyle';
-import { useEffect, useState } from 'react';
 import useToken from '../../hooks/useToken';
+import { useEffect, useState } from 'react';
+import HotelComponent from '.';
 import { getHotelInformation } from '../../services/paymentApi';
-import NoPayment from './noPayment';
 
-export default function NoHotel() {
+export default function NoPayment() {
   const token = useToken();
-  const [ticketType, setTicketType] = useState();
+  const [paid, setPaid] = useState();
 
   useEffect(() => {
     const promise = getHotelInformation(token);
 
     promise.then((res) => {
       console.log(res);
-      setTicketType(res.ticketTypeId);
+      setPaid(res.status);
     });
 
     promise.catch((err) => {
-      console.log(err);
+      alert('erro', err.response.data);
     });
   }, []);
 
   return (
     <>
-      {ticketType ===! 3
+      {paid === 'PAID'
         ?
-        <Text>
-          Sua modalidade de ingresso não inclui hospedagem
-          <br />
-          Prossiga para a escolha de atividades
-        </Text>
+        <HotelComponent/>
         :
-        <NoPayment/>
+        <Text>
+          Você precisa ter confirmado pagamento antes
+          <br />
+          de fazer a escolha de hospedagem
+        </Text>
       }
     </>
   );

@@ -6,17 +6,12 @@ import 'react-credit-cards/es/styles-compiled.css';
 import { Subtitle, ValidCvc, BoxCard, PaymentForm, ReservationButton, Loading } from '../../style/paymentStyle';
 import axios from 'axios';
 import useToken from '../../hooks/useToken';
-import { useContext } from 'react';
-import UserContext from '../../contexts/UserContext';
 import { toast } from 'react-toastify';
  
 export default function CreditCard(props) {
-  const { userData: user } = useContext(UserContext);
   const token = useToken();
   const [payment, setPayment] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [paymentData, setPaymentData] = useState({});
-  const [teste, setTeste] = useState({});
   const [form, setForm] = useState({
     cvc: '',
     expiry: '',
@@ -44,11 +39,11 @@ export default function CreditCard(props) {
     setLoading(true);
     const promise = axios.get(`http://localhost:4000/payments?ticketId=${props.ticketPaid}`, config); //trocar URL depois
     promise.then((res) => {
-      setPaymentData(res);
       setPayment(true);
       setLoading(false);
     });
-    promise.catch((res) => {
+    promise.catch((err) => {
+      alert('erro', err.response.data);
       setPayment(false);
       setLoading(false);
     });

@@ -6,10 +6,8 @@ import { AuthContext } from '../../../contexts/Auth';
 import NoHotel from '../../../components/Hotel/noHotel';
 import useToken from '../../../hooks/useToken';
 import { getTickets } from '../../../services/paymentApi';
-import useTicketType from '../../../hooks/api/useTicketType';
-import { getHotels } from '../../../services/hotelApi';
 
-export default function Hotel() {
+export default function Hotel() { 
   const { ticket, setTicket, ticketType, setTicketType } = useContext(AuthContext);
   const token = useToken();
   const [ hotels, setHotels ] = useState([]);
@@ -30,7 +28,7 @@ export default function Hotel() {
   return (
     <>
       <Title>Escolha de hotel e quarto</Title>
-      {ticketType.includesHotel === false ? <NoHotel /> : <HotelComponent />}
+      <NoHotel />
     </>
   );
 }
