@@ -16,7 +16,7 @@ export default function NoPayment() {
     });
 
     promise.catch((err) => {
-      console.log('erro ticket', err.response.data);
+      alert('erro', err.response.data);
     });
   }, []);
 
@@ -28,9 +28,9 @@ export default function NoPayment() {
           <HotelComponent/>
           :
           <Text>
-           Você precisa ter confirmado pagamento
+           Você precisa ter confirmado pagamento antes
             <br />
-           antes de fazer a escolha de hospedagem
+           de fazer a escolha de hospedagem
           </Text>
         }
       </Text>

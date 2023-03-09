@@ -26,7 +26,7 @@ export default function Payment() {
     });
   
     promise.catch((err) => {
-      console.log(err);
+      alert('erro', err.response.data);
     });
   }, []);
 

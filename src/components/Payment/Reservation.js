@@ -4,12 +4,10 @@ import { AuthContext } from '../../contexts/Auth';
 import { Subtitle } from '../../style/paymentStyle';
 import axios from 'axios';
 import useToken from '../../hooks/useToken';
-import UserContext from '../../contexts/UserContext';
 
 export default function Reservation({ setShowPayment, setTicketData, ticketData, ticket }) {
-  const { userData: user } = useContext(UserContext);
   const token = useToken();
-  const { accomodation, ticket2, setTicket2 } = useContext(AuthContext);
+  const { setTicket2 } = useContext(AuthContext);
   // setTicket ticket
   let value = 0;
   let ticketName = '';
@@ -27,7 +25,6 @@ export default function Reservation({ setShowPayment, setTicketData, ticketData,
   function setData() {
     const promise = axios.post('http://localhost:4000/tickets', ticketDataAPI, config); //trocar URL depois
     promise.then((res) => {
-      console.log('resposta api reserva', res.data);
       setTicket2(res.data);
       setShowPayment(true);
       setTicketData({ price: value, name: ticketName });

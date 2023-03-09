@@ -20,7 +20,7 @@ export default function Accomodation({ setShowPayment, setTicketData }) {
     });
 
     promise.catch((err) => {
-      console.log('erro ticket', err.response.data);
+      alert('erro', err.response.data);
     });
   }, [setCards]);
 

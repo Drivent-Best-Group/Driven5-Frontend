@@ -16,13 +16,13 @@ export default function NoHotel() {
     });
 
     promise.catch((err) => {
-      console.log(err);
+      alert('erro');
     });
   }, []);
 
   return (
     <>
-      {ticketType ==! 3
+      {ticketType ===! 3
         ?
         <Text>
           Sua modalidade de ingresso não inclui hospedagem

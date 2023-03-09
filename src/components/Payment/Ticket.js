@@ -8,8 +8,6 @@ export default function Ticket() {
   const { ticket, setTicket } = useContext(AuthContext);
   const [cards, setCards] = useState([]);
   const token = useToken();
-  console.log('ticket', ticket);
-  console.log('cards', cards);
   
   useEffect(() => {
     const promise = getTickets(token);
@@ -20,7 +18,7 @@ export default function Ticket() {
     });
 
     promise.catch((err) => {
-      console.log('erro ticket', err.response.data);
+      alert('erro', err.response.data);
     });
   }, [setCards]);
 
