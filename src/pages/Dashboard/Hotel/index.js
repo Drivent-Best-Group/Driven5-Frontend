@@ -1,16 +1,18 @@
 import styled from 'styled-components';
 import useTicket from '../../../hooks/api/useTicket';
-import { HotelComponent } from '../../../components/Hotel';
+import HotelComponent from '../../../components/Hotel';
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../../contexts/Auth';
 import NoHotel from '../../../components/Hotel/noHotel';
 import useToken from '../../../hooks/useToken';
 import { getTickets } from '../../../services/paymentApi';
 import useTicketType from '../../../hooks/api/useTicketType';
+import { getHotels } from '../../../services/hotelApi';
 
 export default function Hotel() {
   const { ticket, setTicket, ticketType, setTicketType } = useContext(AuthContext);
   const token = useToken();
+  const [ hotels, setHotels ] = useState([]);
 
   useEffect(() => {
     const promise = getTickets(token);
@@ -28,8 +30,7 @@ export default function Hotel() {
   return (
     <>
       <Title>Escolha de hotel e quarto</Title>
-      <NoHotel />
-      {/* {ticketType.includesHotel === false ? <NoHotel /> : <HotelComponent />} */}
+      {ticketType.includesHotel === false ? <NoHotel /> : <HotelComponent />}
     </>
   );
 }
@@ -40,4 +41,9 @@ const Title = styled.h1`
   color: #000000;
   font-family: 'Roboto', sans-serif;
   margin-bottom: 37px;
+`;
+
+const DivHotelOptions = styled.div`
+  display: flex;
+
 `;
