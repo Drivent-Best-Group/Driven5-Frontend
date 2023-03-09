@@ -22,7 +22,7 @@ export default function NoHotel() {
 
   return (
     <>
-      {ticketType ==! 3
+      {ticketType !== 3
         ?
         <Text>
           Sua modalidade de ingresso não inclui hospedagem
