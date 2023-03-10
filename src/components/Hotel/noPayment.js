@@ -12,6 +12,7 @@ export default function NoPayment() {
     const promise = getHotelInformation(token);
 
     promise.then((res) => {
+      console.log(res);
       setPaid(res.status);
     });
 
@@ -22,18 +23,16 @@ export default function NoPayment() {
 
   return (
     <>
-      <Text>
-        {paid === 'PAID'
-          ?
-          <HotelComponent/>
-          :
-          <Text>
-           Você precisa ter confirmado pagamento antes
-            <br />
-           de fazer a escolha de hospedagem
-          </Text>
-        }
-      </Text>
+      {paid === 'PAID'
+        ?
+        <HotelComponent/>
+        :
+        <Text>
+          Você precisa ter confirmado pagamento antes
+          <br />
+          de fazer a escolha de hospedagem
+        </Text>
+      }
     </>
   );
 }

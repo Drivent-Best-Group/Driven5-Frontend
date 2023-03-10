@@ -6,7 +6,8 @@ import 'react-credit-cards/es/styles-compiled.css';
 import { Subtitle, ValidCvc, BoxCard, PaymentForm, ReservationButton, Loading } from '../../style/paymentStyle';
 import axios from 'axios';
 import useToken from '../../hooks/useToken';
-
+import { toast } from 'react-toastify';
+ 
 export default function CreditCard(props) {
   const token = useToken();
   const [payment, setPayment] = useState(false);
@@ -56,7 +57,7 @@ export default function CreditCard(props) {
       /[^0-9]/g.test(form.cvc) ||
       /[^a-zA-Z ]/g.test(form.name)
     ) {
-      return alert('Revise os dados do seu cartão e tente novamente');
+      return toast('Revise os dados do seu cartão e tente novamente');
     }
 
     setLoading(true);
@@ -66,7 +67,7 @@ export default function CreditCard(props) {
       setLoading(false);
     });
     promise.catch((res) => {
-      alert('Sua forma de pagamento foi recusada, tente novamente');
+      toast('Sua forma de pagamento foi recusada, tente novamente');
       setLoading(false);
     });
   }
