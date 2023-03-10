@@ -4,15 +4,23 @@ import { AuthContext } from '../../contexts/Auth';
 import axios from 'axios';
 import { getHotelsWithRooms } from '../../services/hotelApi';
 import useToken from '../../hooks/useToken';
+import { useState } from 'react';
 
 export default function HotelOptions(props) {
   const token = useToken();
-  const { hotel, setHotel } = useContext(AuthContext);
+  const { hotel, setHotel, showRooms, setShowRooms, hotelWRoom, setHotelWRoom,  showBtn, setShowBtn } = useContext(AuthContext);
+
   function handleClick() {
     setHotel(props.hotel);
-    const hotelWRoom = getHotelsWithRooms(token, props.hotel.id)
-      .then((res) => { console.log(res); })
-      .catch((res) => { console.log(res); });
+    setShowBtn(false);
+    setShowRooms(true);
+    getHotelsWithRooms(token, props.hotel.id)
+      .then((res) => {
+        setHotelWRoom(res.Rooms); 
+      })
+      .catch((res) => { 
+        console.log(res); 
+      });
   }
   return (
     <>
