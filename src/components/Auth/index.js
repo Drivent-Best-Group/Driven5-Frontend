@@ -84,3 +84,19 @@ export const DivDesc = styled.div`
     padding: 10px 0px 0px 14px;
 `;
 
+export const ReserveBtn = styled.button`
+width: 182px;
+height: 37px;
+
+margin-top: 46px;
+
+background: #E0E0E0;
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+border-radius: 4px;
+
+cursor: pointer;
+
+:hover{
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.50);
+}
+`;

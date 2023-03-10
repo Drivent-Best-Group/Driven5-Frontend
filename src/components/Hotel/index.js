@@ -7,16 +7,19 @@ import { BookRoom, getHotels, getRoomBookings } from '../../services/hotelApi';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/Auth';
 import IconComponent from './Icon';
+import { useNavigate } from 'react-router-dom';
 
 export default function HotelComponent() {
   const token = useToken();
   const [ hotels, setHotels ] = useState([]);
-  const { hotel, setHotel, showRooms, setShowRooms, hotelWRoom, setHotelWRoom, room, setRoom, showBtn, setShowBtn, roomClicked, setRoomClicked } = useContext(AuthContext);
+  const { showRooms, hotelWRoom, showBtn, roomClicked } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   function reserveRoom(token, roomId) {
     BookRoom(token, roomId)
       .then((res) => {
-        console.log(res);
+        console.log('res index', res);
+        navigate('/dashboard/resume');
       })
       .catch((err) => {
         console.log(err);

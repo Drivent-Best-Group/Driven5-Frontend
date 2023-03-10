@@ -39,3 +39,13 @@ export async function BookRoom(token, roomId) {
   });
   return response.data;
 }
+
+export async function GetResume(token) {
+  const response = await api.get('/booking/', {
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+  });
+  
+  return response.data;
+}
