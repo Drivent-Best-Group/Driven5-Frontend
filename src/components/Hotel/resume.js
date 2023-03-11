@@ -8,6 +8,21 @@ export default function Resume() {
   const [resumeRoom, setResumeRoom] = useState([]);
   const [resumeHotel, setResumeHotel] = useState([]);
 
+  function getStringForCapacity() {
+    switch (resumeRoom.capacity) {
+    case 1:
+      return 'Singles';
+    case 2:
+      return 'Double';
+    case 3:
+      return 'Triple';
+    case 4:
+      return 'Quadruple';
+    case 5:
+      return 'Quintuple';
+    }
+  };
+
   useEffect(() => {
     const promise = GetResume(token);
 
@@ -24,16 +39,16 @@ export default function Resume() {
       alert('erro', err.response.data);
     });
   }, []);
-  return(
+  return (
     <>
       <Box>
-        <Image src={resumeHotel.image}/>
+        <Image src={resumeHotel.image} />
         <DivDesc>
           <Name>{resumeHotel.name}</Name>
           <Desc>Quarto reservado:</Desc>
-          <DescValue>{resumeRoom.name}</DescValue>
+          <DescValue>{resumeRoom.name} ({getStringForCapacity()})</DescValue>
           <Desc>Pessoas no seu quarto</Desc>
-          <DescValue>{resumeRoom.capacity === 1 ? 'Apenas você' : `Você e mais ${resumeRoom.capacity - 1}` }</DescValue>
+          <DescValue>{resumeRoom.capacity === 1 ? 'Apenas você' : `Você e mais ${resumeRoom.capacity - 1} ${resumeRoom.capacity >= 3 ? 'pessoas' : 'pessoa'}`}</DescValue>
         </DivDesc>
       </Box>
       <ReserveBtn onClick={() => { alert('card troca de quarto'); }}>TROCAR DE QUARTO</ReserveBtn>
