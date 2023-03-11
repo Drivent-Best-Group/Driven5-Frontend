@@ -14,20 +14,17 @@ export default function Payment() {
   const [showPayment, setShowPayment] = useState(false);
   const [ticketData, setTicketData] = useState({});
   const { enrollment } = useEnrollment();
-  
+
   const token = useToken();
-  
-  useEffect(() => {
-    const promise = getUserTickets(token);
-  
-    promise.then((res) => {
-      setTicket2(res);
+
+  useEffect(async() => {
+    try {
+      const promise = await getUserTickets(token);
+      setTicket2(promise);
       setShowPayment(true);
-    });
-  
-    promise.catch((err) => {
+    } catch (err) {
       console.log('erro', err.response.data);
-    });
+    }
   }, []);
 
   if (!enrollment) {
