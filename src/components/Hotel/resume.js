@@ -46,7 +46,7 @@ export default function Resume() {
           <Desc>Quarto reservado:</Desc>
           <DescValue>{resumeRoom.name} ({getStringForCapacity()})</DescValue>
           <Desc>Pessoas no seu quarto</Desc>
-          <DescValue>{resumeRoom.capacity === 1 ? 'Apenas você' : `Você e mais ${resumeRoom.capacity - 1}`}</DescValue>
+          <DescValue>{resumeRoom.capacity === 1 ? 'Apenas você' : `Você e mais ${resumeRoom.capacity - 1} ${resumeRoom.capacity >= 3 ? 'pessoas' : 'pessoa'}`}</DescValue>
         </DivDesc>
       </Box>
       <ReserveBtn onClick={() => { alert('card troca de quarto'); }}>TROCAR DE QUARTO</ReserveBtn>
