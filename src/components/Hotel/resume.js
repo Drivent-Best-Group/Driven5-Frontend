@@ -15,7 +15,9 @@ export default function Resume() {
       console.log(res);
 
       setResumeRoom(res.Room);
+      console.log(resumeRoom);
       setResumeHotel(res.Hotel);
+      console.log(resumeHotel);
     });
 
     promise.catch((err) => {
