@@ -3,17 +3,44 @@ import { Subtitle } from '../../style/paymentStyle';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import useToken from '../../hooks/useToken';
-import { BookRoom, getHotels, getRoomBookings } from '../../services/hotelApi';
+import { BookRoom, getHotels, GetResume, getRoomBookings, updateRoom } from '../../services/hotelApi';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/Auth';
 import IconComponent from './Icon';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function HotelComponent() {
   const token = useToken();
-  const [ hotels, setHotels ] = useState([]);
-  const { showRooms, hotelWRoom, showBtn, roomClicked } = useContext(AuthContext);
+  const [hotels, setHotels] = useState([]);
+  const [bookingId, setBookingId] = useState([]);
+  const { showRooms, hotelWRoom, showBtn, roomClicked, change, setChange } =
+    useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(async() => {
+    try {
+      const promise = await GetResume(token);
+      setBookingId(promise.id);
+      if (!change) {
+        navigate('/dashboard/resume');
+      }
+    } catch (err) {
+      console.log('erro', err.response.data);
+    }
+  }, []);
+
+  async function newReservation(token, roomId) {
+    try {
+      await updateRoom(token, roomId, bookingId);
+      setChange(false);
+      navigate('/dashboard/resume');
+      toast('Reserva trocada com sucesso');
+    } catch (err) {
+      console.log(err);
+      toast('Algo deu errado na sua troca');
+    }
+  }
 
   function reserveRoom(token, roomId) {
     BookRoom(token, roomId)
@@ -25,7 +52,7 @@ export default function HotelComponent() {
         console.log(err);
       });
   }
-  
+
   useEffect(() => {
     const promiseHotel = getHotels(token);
 
@@ -43,26 +70,51 @@ export default function HotelComponent() {
       <Subtitle>Primeiro, escolha seu hotel</Subtitle>
       <DivHotelOptions>
         {hotels.map((hotel) => {
-          return(
-            <HotelOptions hotel={hotel} key={hotel.id} availableRooms={103} accommodations={'Single e Double'} name={hotel.name} image={hotel.image}/>
+          return (
+            <HotelOptions
+              hotel={hotel}
+              key={hotel.id}
+              availableRooms={103}
+              accommodations={'Single e Double'}
+              name={hotel.name}
+              image={hotel.image}
+            />
           );
         })}
       </DivHotelOptions>
-      {
-        hotelWRoom.length == 0 ? '' : showRooms ? 
-          <>
-            <RoomsDiv>
-              {hotelWRoom.map((room) => {
-                return(
-                  <IconComponent room={room} key={room.id}/>
-                );
-              })}
-            </RoomsDiv> 
-            {showBtn ? <ReserveBtn onClick={() => { reserveRoom(token, roomClicked.id); }}>RESERVAR QUARTO</ReserveBtn> : '' }
-          </>
-          : 
-          ''
-      }
+      {hotelWRoom.length == 0 ? (
+        ''
+      ) : showRooms ? (
+        <>
+          <RoomsDiv>
+            {hotelWRoom.map((room) => {
+              return <IconComponent room={room} key={room.id} />;
+            })}
+          </RoomsDiv>
+
+          {!showBtn ? (
+            ''
+          ) : change ? (
+            <ReserveBtn
+              onClick={() => {
+                newReservation(token, roomClicked.id);
+              }}
+            >
+              TROCAR QUARTO
+            </ReserveBtn>
+          ) : (
+            <ReserveBtn
+              onClick={() => {
+                reserveRoom(token, roomClicked.id);
+              }}
+            >
+              RESERVAR QUARTO
+            </ReserveBtn>
+          )}
+        </>
+      ) : (
+        ''
+      )}
     </>
   );
 }
@@ -73,14 +125,14 @@ const ReserveBtn = styled.button`
 
   margin-top: 46px;
 
-  background: #E0E0E0;
+  background: #e0e0e0;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
 
   cursor: pointer;
 
-  :hover{
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.50);
+  :hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
   }
 `;
 

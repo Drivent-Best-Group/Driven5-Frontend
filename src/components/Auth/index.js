@@ -51,6 +51,12 @@ export const Box = styled.div`
   }
 
 `;
+export const HotelBox = styled(Box)`
+background-color: #FFEED2;
+:hover{
+  cursor: inherit;
+}
+`;
 
 export const Image = styled.img`
     width: 168px;

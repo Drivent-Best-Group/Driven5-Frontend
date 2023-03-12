@@ -7,7 +7,7 @@ import { Subtitle, ValidCvc, BoxCard, PaymentForm, ReservationButton, Loading } 
 import axios from 'axios';
 import useToken from '../../hooks/useToken';
 import { toast } from 'react-toastify';
- 
+
 export default function CreditCard(props) {
   const token = useToken();
   const [payment, setPayment] = useState(false);
@@ -35,18 +35,17 @@ export default function CreditCard(props) {
     },
   };
 
-  useEffect(() => {
-    setLoading(true);
-    const promise = axios.get(`http://localhost:4000/payments?ticketId=${props.ticketPaid}`, config); //trocar URL depois
-    promise.then((res) => {
+  useEffect(async() => {
+    try {
+      setLoading(true);
+      const promise = await axios.get(`http://localhost:4000/payments?ticketId=${props.ticketPaid}`, config);
       setPayment(true);
       setLoading(false);
-    });
-    promise.catch((err) => {
-      alert('erro', err.response.data);
+    } catch (err) {
+      console.log('erro', err.response.data);
       setPayment(false);
       setLoading(false);
-    });
+    }
   }, []);
 
   async function confirmPayment(event) {

@@ -187,3 +187,4 @@ export const Text = styled.div`
 
   color: #8e8e8e;
 `;
+
